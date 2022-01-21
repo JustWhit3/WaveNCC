@@ -1,2 +1,6 @@
+# Personal folders
 pdf/
 .vscode/
+
+# Binary files
+src/*.pyc
