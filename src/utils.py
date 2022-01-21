@@ -1,10 +1,34 @@
+# -*- coding: utf-8 -*-
+
 # System libraries
-from multiprocessing.sharedctypes import Value
 import parser
-from math import cos, pi 
+from math import sin, cos, pi 
 
 # Other libraries
 import doctest
+
+#################################################
+#     Global variables
+#################################################
+inf = 0
+sup = 2*pi
+
+#################################################
+#     Testing functions
+#################################################
+def test_integral( n, x ):
+    """
+    Function used for testing only.
+    """
+    
+    return pow( sin( x ), n ) - cos( x )
+
+def test_integral_2( n, x ):
+    """
+    Function used for testing only.
+    """
+    
+    return pow( x, n )
 
 #################################################
 #     "colorr" class
@@ -16,6 +40,34 @@ class color:
     
     red = "\033[31m"
     reset = "\033[0m"
+    
+#################################################
+#     "IsInBounds" function
+#################################################
+def IsInBounds( value, min, max ):
+    """
+    Function to check if a value is in certain bounds.
+
+    Args:
+        value (any): the interested value.
+        min (any): min value.
+        max (any): max value.
+
+    Returns:
+        bool: return true if is in the bound, otherwise false.
+        
+    Testing:
+        >>> IsInBounds( 3, 1, 5 )
+        True
+        >>> IsInBounds( 2.3, -2, 3 )
+        True
+        >>> IsInBounds( 1, 2, 3 )
+        False
+    """
+    
+    if min < value < max:
+        return True
+    return False
 
 #################################################
 #     "expression_parser" function
@@ -27,8 +79,8 @@ def expression_parser( real_part, imaginary_part, n, x ):
     Args:
         real_part (string): mathematical real expression part.
         imaginary_part (string): mathematical imaginary expression part.
-        n (int): wave function index.
-        x (double): expression variable.
+        n (any): wave function index.
+        x (any): expression variable.
 
     Returns:
         complex: returns the value of a complex parsed expression for an index n and variable x.
@@ -53,7 +105,43 @@ def expression_parser( real_part, imaginary_part, n, x ):
     
     return complex( eval( real_p ), eval( imag_p ) )
 
-#def integral( f ):
+#################################################
+#     "integral" function
+#################################################
+def integral( function, n ):
+    """
+    1-dimensional integral solution in the range [0,2*pi], using the Simpson rule.
+
+    Args:
+        function ([type]): [description]
+        a ([type]): [description]
+        b ([type]): [description]
+        n ([type]): [description]
+
+    Returns:
+        [type]: [description]
+        
+    Testing:
+        >>> IsInBounds( integral( test_integral, 2 ), 3.12, 3.16 )
+        True
+        >>> IsInBounds( integral( test_integral_2, 2 ), 82.1, 83.2 )
+        True
+    """
+    
+    nm = 1000
+    first = ( sup - inf ) / nm
+    val = nm / 2
+    result = 0
+    
+    for i in range( 1, int( val - 1 ) ):
+        x = inf + 2 * i * first
+        result = result + 2 * function( n, x )
+    for i in range( 1, int( val ) ):
+        x = inf + ( 2 * i - 1 ) * first
+        result = result + 4 * function( n, x )
+    result = first * ( result + function( n, inf ) + function( n, sup ) ) / 3
+        
+    return result
     
     
 #################################################
