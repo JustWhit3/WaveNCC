@@ -1,50 +1,68 @@
 # -*- coding: utf-8 -*-
 
-# System libraries
+#################################################
+#     Libraries
+#################################################
 import parser
-from math import sin, cos, pi 
-
-# Other libraries
+import math as mt
 import doctest
-
-#################################################
-#     Global variables
-#################################################
-inf = 0
-sup = 2*pi
+from termcolor import colored
 
 #################################################
 #     Testing functions
 #################################################
-def test_integral( n, x ):
+def test_integral( x ):
     """
     Function used for testing only.
     """
     
-    return pow( sin( x ), n ) - cos( x )
+    n = 2
+    return x * mt.exp( -pow( x, 2 ) )
 
-def test_integral_2( n, x ):
+def test_integral_2( x ):
     """
     Function used for testing only.
     """
     
-    return pow( x, n )
+    n = 2
+    return mt.exp( -2 * pow( x, 2 ) )
 
-#################################################
-#     "colorr" class
-#################################################
-class color:
+def test_integral_3( x ):
     """
-    Class to manage output stream colors and styles.
+    Function used for testing only.
     """
     
-    red = "\033[31m"
-    reset = "\033[0m"
+    n = 2
+    return pow( x, 2 )
+
+def Hermite( x, n ):
+    """
+    Function used for testing only.
+    """
+    
+    if n == 0:
+        return 1
+    elif n == 1:
+        return 2 * x
+    else:
+        return 2 * x * Hermite( x, n-1 ) - 2 * ( n-1 ) * Hermite( x, n-2 )
+    
+def H_non( x, n ):
+    """
+    Function used for testing only.
+    """
+    
+    if n == 0:
+        return 1
+    elif n == 1:
+        return 2 * x
+    else:
+        return 2 * x
     
 #################################################
 #     "IsInBounds" function
 #################################################
-def IsInBounds( value, min, max ):
+def IsInBounds( value, min_, max_ ):
     """
     Function to check if a value is in certain bounds.
 
@@ -65,36 +83,36 @@ def IsInBounds( value, min, max ):
         False
     """
     
-    if min < value < max:
+    if min_ < value < max_:
         return True
     return False
 
 #################################################
 #     "expression_parser" function
 #################################################
-def expression_parser( real_part, imaginary_part, n, x ):
+def e_parser( real_part, imaginary_part, n, x ):
     """
     Returns the complex value of a parsed expression.
 
     Args:
         real_part (string): mathematical real expression part.
         imaginary_part (string): mathematical imaginary expression part.
-        n (any): wave function index.
+        n (int): wave function index.
         x (any): expression variable.
 
     Returns:
         complex: returns the value of a complex parsed expression for an index n and variable x.
         
     Testing:
-        >>> expression_parser( "pow( x, n )", "0", 2, 2 )
+        >>> e_parser( "pow( x, n )", "0", 2, 2 )
         (4+0j)
-        >>> expression_parser( "n*cos( x )", "3*n", 2, pi )
+        >>> e_parser( "n*mt.cos( x )", "3*n", 2, mt.pi )
         (-2+6j)
-        >>> expression_parser( "n*cos( k )", "3*n", 2, pi )
+        >>> e_parser( "n*mt.cos( k )", "3*n", 2, mt.pi )
         Traceback (most recent call last):
             ...
         NameError: name 'k' is not defined
-        >>> expression_parser( "n*cos( x )", "3*z", 2, pi )
+        >>> e_parser( "n*mt.cos( x )", "3*z", 2, mt.pi )
         Traceback (most recent call last):
             ...
         NameError: name 'z' is not defined
@@ -108,44 +126,75 @@ def expression_parser( real_part, imaginary_part, n, x ):
 #################################################
 #     "integral" function
 #################################################
-def integral( function, n ):
+def integral( function ):
     """
-    1-dimensional integral solution in the range [0,2*pi], using the Simpson rule.
+    1-dimensional integral solution in the range [-inf,inf], using the Simpson rule.
 
     Args:
-        function ([type]): [description]
-        a ([type]): [description]
-        b ([type]): [description]
-        n ([type]): [description]
+        function (any): integrand function
 
-    Returns:
-        [type]: [description]
+    Returns:\033[31m
+        any: integral of the given function
         
     Testing:
-        >>> IsInBounds( integral( test_integral, 2 ), 3.12, 3.16 )
+        >>> IsInBounds( integral( test_integral ), -0.001, 0.001 )
         True
-        >>> IsInBounds( integral( test_integral_2, 2 ), 82.1, 83.2 )
+        >>> IsInBounds( integral( test_integral_2 ), 1.23, 1.25 )
         True
+        >>> integral( test_integral_3 )
+        Traceback (most recent call last):
+            ...
+        RuntimeError: \033[31mThe wave function integral diverges!\033[0m
     """
     
-    nm = 1000
-    first = ( sup - inf ) / nm
-    val = nm / 2
+    inf = 0
+    sup = mt.pi
+    first = ( sup - inf ) / 1000
+    val = 1000 / 2
     result = 0
     
     for i in range( 1, int( val - 1 ) ):
         x = inf + 2 * i * first
-        result = result + 2 * function( n, x )
+        result = result + 2 * function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
     for i in range( 1, int( val ) ):
         x = inf + ( 2 * i - 1 ) * first
-        result = result + 4 * function( n, x )
-    result = first * ( result + function( n, inf ) + function( n, sup ) ) / 3
+        result = result + 4 * function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
         
-    return result
+    result = first * ( result + ( function( mt.tan( inf ) ) / pow( mt.cos( inf ), 2 ) ) + ( function( mt.tan( sup ) ) / pow( mt.cos( sup ), 2 ) ) ) / 3
     
+    if result < -1e10 or result > 1e10:
+        raise RuntimeError( colored( "The wave function integral diverges!", "red" ) )
+    else:
+        return result
+
+#################################################
+#     "kronecker" function
+#################################################
+def kronecker( i, j ):
+    """
+    Definition of the Kronecker delta function for two numbers i and j.
+
+    Args:
+        i (int): index i
+        j (int): index j
+
+    Returns:
+        int: return the Kronecker delta value.
+        
+    Testing:
+        >>> kronecker( 2, 2 )
+        1
+        >>> kronecker( 1, 2 )
+        0
+    """
+    
+    if i == j:
+        return 1
+    else:
+        return 0
     
 #################################################
-#     Performing tests
+#     Doing tests
 #################################################
 if __name__ == "__main__":
     doctest.testmod()
