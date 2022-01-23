@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+"""
+Created on Fri Jan 21 12:34:00 2022
+
+@author: Gianluca Bianco
+"""
+
 #################################################
 #     Libraries
 #################################################
@@ -7,6 +13,7 @@ import parser
 import math as mt
 import doctest
 from termcolor import colored
+import numpy as np
 
 #################################################
 #     Testing functions
@@ -47,17 +54,13 @@ def Hermite( x, n ):
     else:
         return 2 * x * Hermite( x, n-1 ) - 2 * ( n-1 ) * Hermite( x, n-2 )
     
-def H_non( x, n ):
-    """
-    Function used for testing only.
-    """
-    
+def Legendre( x, n ): 
     if n == 0:
         return 1
     elif n == 1:
-        return 2 * x
+        return x
     else:
-        return 2 * x
+        return ( ( ( 2 * n ) - 1 ) * x * Legendre( n - 1, x ) - ( n - 1 ) * Legendre( n-2, x ) ) / float( n )
     
 #################################################
 #     "IsInBounds" function
@@ -126,7 +129,7 @@ def e_parser( real_part, imaginary_part, n, x ):
 #################################################
 #     "integral" function
 #################################################
-def integral( function ):
+def integral( function, a, b ):
     """
     1-dimensional integral solution in the range [-inf,inf], using the Simpson rule.
 
@@ -137,33 +140,58 @@ def integral( function ):
         any: integral of the given function
         
     Testing:
-        >>> IsInBounds( integral( test_integral ), -0.001, 0.001 )
+        >>> IsInBounds( integral( test_integral, -np.Infinity, np.Infinity ), -0.001, 0.001 )
         True
-        >>> IsInBounds( integral( test_integral_2 ), 1.23, 1.25 )
+        >>> IsInBounds( integral( test_integral_2, -np.Infinity, np.Infinity ), 1.23, 1.25 )
         True
-        >>> integral( test_integral_3 )
+        >>> integral( test_integral_3, -np.Infinity, np.Infinity )
         Traceback (most recent call last):
             ...
-        RuntimeError: \033[31mThe wave function integral diverges!\033[0m
+        RuntimeError: \033[31mThe wave function integral is divergent!\033[0m
+        >>> IsInBounds( integral( test_integral_3, 1, 4 ), 19.5, 21.5 )
+        True
+        >>> IsInBounds( integral( test_integral, 0, np.Infinity ), 0.49, 0.51 )
+        True
+        >>> IsInBounds( integral( test_integral_2, -np.Infinity, 0 ), 0.61, 0.63 )
+        True
     """
     
-    inf = 0
-    sup = mt.pi
-    first = ( sup - inf ) / 1000
+    if a == -np.Infinity or b == np.Infinity:
+        inf = 0
+        sup = mt.pi
+        if a != -np.Infinity and b == np.Infinity:
+            inf = 0
+            sup = mt.pi / 2
+        elif a == -np.Infinity and b != np.Infinity:
+            inf = -mt.pi / 2
+            sup = 0
+        var = lambda x: function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
+        var_inf = function( mt.tan( inf ) ) / pow( mt.cos( inf ), 2 )
+        var_sup = function( mt.tan( sup ) ) / pow( mt.cos( sup ), 2 )
+    elif a != -np.Infinity and b != np.Infinity:
+        inf = a
+        sup = b
+        var = lambda x: function( x )
+        var_inf = function( inf )
+        var_sup = function( sup )
+    else:
+        raise RuntimeError( colored( "Invalid integral bounds!", "red" ) )
+    
+    first = abs( sup - inf ) / 1000
     val = 1000 / 2
     result = 0
     
     for i in range( 1, int( val - 1 ) ):
         x = inf + 2 * i * first
-        result = result + 2 * function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
+        result = result + 2 * var( x )
     for i in range( 1, int( val ) ):
         x = inf + ( 2 * i - 1 ) * first
-        result = result + 4 * function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
+        result = result + 4 * var( x )
         
-    result = first * ( result + ( function( mt.tan( inf ) ) / pow( mt.cos( inf ), 2 ) ) + ( function( mt.tan( sup ) ) / pow( mt.cos( sup ), 2 ) ) ) / 3
+    result = first * ( result + var_inf + var_sup ) / 3
     
     if result < -1e10 or result > 1e10:
-        raise RuntimeError( colored( "The wave function integral diverges!", "red" ) )
+        raise RuntimeError( colored( "The wave function integral is divergent!", "red" ) )
     else:
         return result
 

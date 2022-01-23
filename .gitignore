@@ -4,3 +4,4 @@ pdf/
 
 # Binary files
 src/*.pyc
+src/__pycache__/
