@@ -151,7 +151,7 @@ def e_parser( real_part, imaginary_part, n, x ):
 #################################################
 def integral( function, a, b ):
     """
-    1-dimensional integral solution in the range [-inf,inf], using the Simpson rule.
+    1-dimensional integral solution for finite and infinite bound conditions, using the Simpson rule.
 
     Args:
         function (any): integrand function

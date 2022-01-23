@@ -50,6 +50,8 @@ def orthogonality( real_part, imaginary_part, a, b ):
     
     for m in range( m_ ):
         for n in range( n_ ):
+            if m == 0 and n == 0:
+                continue
             function_product_real = lambda x: ( ut.e_parser( real_part, imaginary_part, m, x ).conjugate() * ut.e_parser( real_part, imaginary_part, n, x ) ).real
             function_product_imag = lambda x: ( ut.e_parser( real_part, imaginary_part, m, x ).conjugate() * ut.e_parser( real_part, imaginary_part, n, x ) ).imag
             product_integral = complex( ut.integral( function_product_real, a, b ), ut.integral( function_product_imag, a, b ) )
@@ -61,6 +63,56 @@ def orthogonality( real_part, imaginary_part, a, b ):
                 else:
                     arr = np.append( arr, False )
     
+    if False in arr:
+        return False
+    else:
+        return True
+    
+#################################################
+#     "normalized" function
+#################################################
+def orthonormality( real_part, imaginary_part, a, b ):
+    """
+    Function used to check if a given wave function, depending on a polynomial, can be normalized or not.
+
+    Args:
+        real_part (any): real part of the given function
+        imaginary_part (any): imaginary part of the give function
+        
+    Returns:
+        bool: returns the bool condition for the function normalization.
+        
+    Testing:
+        >>> orthonormality( "mt.sqrt( 2 ) * mt.sin( n * mt.pi * x )", "0", 0, 1 )
+        True
+        >>> orthonormality( "( 1 / mt.sqrt( pow( 2, n ) * mt.factorial( n ) * mt.sqrt( mt.pi ) ) * Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 ) )", "0", -np.Infinity, np.Infinity )
+        True
+        >>> orthonormality( "mt.sqrt( n ) * mt.exp( -n * abs( x ) )", "0", 0, np.Infinity )
+        True
+        >>> orthonormality( "Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
+        False
+        >>> orthonormality( "mt.sin( n * mt.pi * x )", "0", 0, 1 )
+        False
+    """
+
+    arr = np.array([])
+    m_ = 5
+    n_ = 5
+
+    for m in range( m_ ):
+        for n in range( n_ ):
+            if m == 0 and n == 0:
+                continue
+            function_product_real = lambda x: ( ut.e_parser( real_part, imaginary_part, m, x ).conjugate() * ut.e_parser( real_part, imaginary_part, n, x ) ).real
+            function_product_imag = lambda x: ( ut.e_parser( real_part, imaginary_part, m, x ).conjugate() * ut.e_parser( real_part, imaginary_part, n, x ) ).imag
+            product_integral = complex( ut.integral( function_product_real, a, b ), ut.integral( function_product_imag, a, b ) )
+            res = round( product_integral.real )
+
+            if res == ut.kronecker( m, n ):
+                arr = np.append( arr, True )
+            else:
+                arr = np.append( arr, False )
+                
     if False in arr:
         return False
     else:
