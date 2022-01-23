@@ -1,23 +1,26 @@
-# System libraries
-from math import sin
+# -*- coding: utf-8 -*-
 
-# My libraries
-import utils
-import functions
+"""
+Created on Fri Jan 21 12:32:00 2022
 
-def func(x):
-    return pow(x,2)
+@author: Gianluca Bianco
+"""
+
+#################################################
+#     Libraries
+#################################################
+import math as mt
+from utils import Hermite
 
 #################################################
 #     Main program
 #################################################
+def f(n,x):
+    return Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )
 
 # Main function
 def main():
-    formula = "func(x)*sin(x)*x**2"
-    code = parser.expr(formula).compile()
-    x = 10
-    print(eval(code))
+    print (0.0031415926535897933/2)
 
 # Main running
 if __name__ == "__main__":

@@ -23,7 +23,6 @@ def test_integral( x ):
     Function used for testing only.
     """
     
-    n = 2
     return x * mt.exp( -pow( x, 2 ) )
 
 def test_integral_2( x ):
@@ -31,7 +30,6 @@ def test_integral_2( x ):
     Function used for testing only.
     """
     
-    n = 2
     return mt.exp( -2 * pow( x, 2 ) )
 
 def test_integral_3( x ):
@@ -39,8 +37,14 @@ def test_integral_3( x ):
     Function used for testing only.
     """
     
-    n = 2
     return pow( x, 2 )
+
+def test_integral_4( x ):
+    """
+    Function used for testing only.
+    """
+    
+    return mt.exp( -x + 4 )
 
 def Hermite( x, n ):
     """
@@ -55,12 +59,28 @@ def Hermite( x, n ):
         return 2 * x * Hermite( x, n-1 ) - 2 * ( n-1 ) * Hermite( x, n-2 )
     
 def Legendre( x, n ): 
+    """
+    Function used for testing only.
+    """
+    
     if n == 0:
         return 1
     elif n == 1:
         return x
     else:
         return ( ( ( 2 * n ) - 1 ) * x * Legendre( n - 1, x ) - ( n - 1 ) * Legendre( n-2, x ) ) / float( n )
+    
+def Laguerre( x, n ): 
+    """
+    Function used for testing only.
+    """
+    
+    if n == 0:
+        return 1
+    elif n == 1:
+        return 1 - x
+    else:
+        return ( ( ( 2 * n + 1 - x ) * Laguerre( x, n - 1 ) ) - x * Laguerre( x, n - 2 ) ) / ( n + 1 )
     
 #################################################
 #     "IsInBounds" function
@@ -154,20 +174,25 @@ def integral( function, a, b ):
         True
         >>> IsInBounds( integral( test_integral_2, -np.Infinity, 0 ), 0.61, 0.63 )
         True
+        >>> IsInBounds( integral( test_integral_4, 0, np.Infinity ), 54.1, 54.9 )
+        True
     """
     
     if a == -np.Infinity or b == np.Infinity:
         inf = 0
         sup = mt.pi
+        
         if a != -np.Infinity and b == np.Infinity:
             inf = 0
             sup = mt.pi / 2
         elif a == -np.Infinity and b != np.Infinity:
             inf = -mt.pi / 2
             sup = 0
+            
         var = lambda x: function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
         var_inf = function( mt.tan( inf ) ) / pow( mt.cos( inf ), 2 )
         var_sup = function( mt.tan( sup ) ) / pow( mt.cos( sup ), 2 )
+        
     elif a != -np.Infinity and b != np.Infinity:
         inf = a
         sup = b
@@ -184,6 +209,7 @@ def integral( function, a, b ):
     for i in range( 1, int( val - 1 ) ):
         x = inf + 2 * i * first
         result = result + 2 * var( x )
+        
     for i in range( 1, int( val ) ):
         x = inf + ( 2 * i - 1 ) * first
         result = result + 4 * var( x )
