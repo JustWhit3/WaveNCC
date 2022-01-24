@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 """
 Created on Fri Jan 21 12:34:00 2022
-
-@author: Gianluca Bianco
+Author: Gianluca Bianco
 """
 
 #################################################
@@ -139,7 +137,14 @@ def e_parser( real_part, imaginary_part, n, x ):
         Traceback (most recent call last):
             ...
         NameError: name 'z' is not defined
+        >>> e_parser( "os.system", "0", 0, 1 )
+        Traceback (most recent call last):
+            ...
+        RuntimeError: \033[31mDon't parse os.system strings! It is dangerous!\033[0m
     """
+    
+    if "os.system" in real_part or "os.system" in imaginary_part:
+        raise RuntimeError( colored( "Don't parse os.system strings! It is dangerous!", "red" ) )
     
     real_p = parser.expr( real_part ).compile()
     imag_p = parser.expr( imaginary_part ).compile()

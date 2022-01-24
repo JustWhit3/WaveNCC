@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 """
 Created on Fri Jan 21 12:33:00 2022
-
-@author: Gianluca Bianco
+Author: Gianluca Bianco
 """
 
 #################################################
@@ -20,14 +18,16 @@ import numpy as np
 #################################################
 def orthogonality( real_part, imaginary_part, a, b ):
     """
-    Function used to check if a given wave function, depending on a polynomial, can be normalized or not.
+    Function used to check if a given wave function is orthogonal.
 
     Args:
         real_part (any): real part of the given function
         imaginary_part (any): imaginary part of the give function
+        a (any): lowest integral extreme
+        b (any): highest integral extreme
         
     Returns:
-        bool: returns the bool condition for the function normalization.
+        bool: returns the bool condition for the function orthogonality.
         
     Testing:
         >>> orthogonality( "Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
@@ -69,18 +69,20 @@ def orthogonality( real_part, imaginary_part, a, b ):
         return True
     
 #################################################
-#     "normalized" function
+#     "orthonormality" function
 #################################################
 def orthonormality( real_part, imaginary_part, a, b ):
     """
-    Function used to check if a given wave function, depending on a polynomial, can be normalized or not.
+    Function used to check if a given wave function is orthonormal.
 
     Args:
         real_part (any): real part of the given function
         imaginary_part (any): imaginary part of the give function
+        a (any): lower integral extreme
+        b (any): upper integral extreme
         
     Returns:
-        bool: returns the bool condition for the function normalization.
+        bool: returns the bool condition for the function orthonormality.
         
     Testing:
         >>> orthonormality( "mt.sqrt( 2 ) * mt.sin( n * mt.pi * x )", "0", 0, 1 )
