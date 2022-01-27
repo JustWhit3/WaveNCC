@@ -52,7 +52,7 @@ def main():
         print()
         print( r )
         print()
-        os.execl( sys.executable, sys.executable, *sys.argv )
+        os.execl( sys.executable, sys.executable, *sys.argv ) 
 
 if __name__ == "__main__":
     main()
