@@ -44,9 +44,22 @@ def test_integral_4( x ):
     
     return mt.exp( -x + 4 )
 
+#################################################
+#     Orthogonal polynomials functions
+#################################################
 def Hermite( x, n ):
     """
-    Function used for testing only.
+    Function used to compute the Hermite polynomials.
+
+    Args:
+        x (any): variable.
+        n (int): polynomials order
+
+    Returns:
+        any: returns the value of the polynomials at a given order for a given variable value.
+        
+    Testing:
+        Already tested in some functions of the "functions.py" library.
     """
     
     if n == 0:
@@ -56,9 +69,41 @@ def Hermite( x, n ):
     else:
         return 2 * x * Hermite( x, n-1 ) - 2 * ( n-1 ) * Hermite( x, n-2 )
     
+def Chebyshev( x, n ):
+    """
+    Function used to compute the Chebyshev polynomials.
+
+    Args:
+        x (any): variable.
+        n (int): polynomials order
+
+    Returns:
+        any: returns the value of the polynomials at a given order for a given variable value.
+        
+    Testing:
+        Already tested in some functions of the "functions.py" library.
+    """
+    
+    if n == 0:
+        return 1
+    elif n == 1:
+        return 2 * x
+    else:
+        return 2 * x * Chebyshev( x, n-1 ) - Chebyshev( x, n-2 )
+    
 def Legendre( x, n ): 
     """
-    Function used for testing only.
+    Function used to compute the Legendre polynomials.
+
+    Args:
+        x (any): variable.
+        n (int): polynomials order
+
+    Returns:
+        any: returns the value of the polynomials at a given order for a given variable value.
+        
+    Testing:
+        Already tested in some functions of the "functions.py" library.
     """
     
     if n == 0:
@@ -70,7 +115,17 @@ def Legendre( x, n ):
     
 def Laguerre( x, n ): 
     """
-    Function used for testing only.
+    Function used to compute the Laguerre polynomials.
+
+    Args:
+        x (any): variable.
+        n (int): polynomials order
+
+    Returns:
+        any: returns the value of the polynomials at a given order for a given variable value.
+        
+    Testing:
+        Already tested in some functions of the "functions.py" library.
     """
     
     if n == 0:
