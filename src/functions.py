@@ -7,11 +7,14 @@ Author: Gianluca Bianco
 #################################################
 #     Libraries
 #################################################
-import math as mt
 import doctest
+from sympy import denom
 from termcolor import colored
 import utils as ut
 import numpy as np
+import math as mt
+import matplotlib.pyplot as plt
+import cplot as cp
 
 #################################################
 #     "prod_integral" function
@@ -59,17 +62,17 @@ def orthogonality( real_part, imaginary_part, a, b ):
         bool: returns the bool condition for the function orthogonality.
         
     Testing:
-        >>> orthogonality( "Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
+        >>> orthogonality( "Hermite( x, n ) * np.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
         True
-        >>> orthogonality( "n * mt.exp( -pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
+        >>> orthogonality( "n * np.exp( -pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
         False
-        >>> orthogonality( "mt.exp( -2 * abs( x ) ) * pow( mt.sin( n ), 2 ) * x", "0", -np.Infinity, np.Infinity )
+        >>> orthogonality( "np.exp( -2 * abs( x ) ) * pow( np.sin( n ), 2 ) * x", "0", -np.Infinity, np.Infinity )
         True
-        >>> orthogonality( "mt.sin( n * mt.pi * x )", "0", 0, 1 )
+        >>> orthogonality( "np.sin( n * np.pi * x )", "0", 0, 1 )
         True
-        >>> orthogonality( "mt.sin( n * mt.pi * x )", "0", 0, 1 )
+        >>> orthogonality( "np.sin( n * np.pi * x )", "0", 0, 1 )
         True
-        >>> orthogonality( "mt.cos( n * mt.pi * x )", "0", 0, 1 )
+        >>> orthogonality( "np.cos( n * np.pi * x )", "0", 0, 1 )
         True
     """
     
@@ -111,15 +114,15 @@ def orthonormality( real_part, imaginary_part, a, b ):
         bool: returns the bool condition for the function orthonormality.
         
     Testing:
-        >>> orthonormality( "mt.sqrt( 2 ) * mt.sin( n * mt.pi * x )", "0", 0, 1 )
+        >>> orthonormality( "np.sqrt( 2 ) * np.sin( n * np.pi * x )", "0", 0, 1 )
         True
-        >>> orthonormality( "( 1 / mt.sqrt( pow( 2, n ) * mt.factorial( n ) * mt.sqrt( mt.pi ) ) * Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 ) )", "0", -np.Infinity, np.Infinity )
+        >>> orthonormality( "( 1 / np.sqrt( pow( 2, n ) * mt.factorial( n ) * np.sqrt( np.pi ) ) * Hermite( x, n ) * np.exp( - pow( x , 2 ) / 2 ) )", "0", -np.Infinity, np.Infinity )
         True
-        >>> orthonormality( "mt.sqrt( n ) * mt.exp( -n * abs( x ) )", "0", 0, np.Infinity )
+        >>> orthonormality( "np.sqrt( n ) * np.exp( -n * abs( x ) )", "0", 0, np.Infinity )
         True
-        >>> orthonormality( "Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
+        >>> orthonormality( "Hermite( x, n ) * np.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity )
         False
-        >>> orthonormality( "mt.sin( n * mt.pi * x )", "0", 0, 1 )
+        >>> orthonormality( "np.sin( n * np.pi * x )", "0", 0, 1 )
         False
     """
 
@@ -161,21 +164,62 @@ def coefficients( real_part, imaginary_part, a, b, n ):
         any: returns the value of the normalization coefficients.
         
     Testing:
-        >>> round( coefficients( "Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity, 1 ), 2 )
+        >>> round( coefficients( "Hermite( x, n ) * np.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity, 1 ), 2 )
         0.53
-        >>> round( coefficients( "Hermite( x, n ) * mt.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity, 3 ), 2 )
+        >>> round( coefficients( "Hermite( x, n ) * np.exp( - pow( x , 2 ) / 2 )", "0", -np.Infinity, np.Infinity, 3 ), 2 )
         0.11
-        >>> round( coefficients( "mt.sin( n * mt.pi * x )", "0", 0, 1, 2 ), 2 )
+        >>> round( coefficients( "np.sin( n * np.pi * x )", "0", 0, 1, 2 ), 2 )
         1.41
-        >>> round( coefficients( "mt.cos( x )", "mt.sin( x )", -1, 1, 0 ), 2 )
+        >>> round( coefficients( "np.cos( x )", "np.sin( x )", -1, 1, 0 ), 2 )
         0.71
     """
     
     res = prod_integral( real_part, imaginary_part, n, n, a, b )
-    denominator = mt.sqrt( res.real )
+    denominator = np.sqrt( res.real )
     
-    return 1 / denominator.real
-        
+    if denominator == 0:
+        return colored( "Error, division by 0!", "red" )
+    else:
+        return 1 / denominator.real
+
+#################################################
+#     "plotter_complex" function
+#################################################
+def plotter_complex( real_part, imaginary_part, a, b, n, coefficient ):
+    """
+    Function used to plot a given wave-function for an index n.
+
+    Args:
+        real_part (string): mathematical real expression part.
+        imaginary_part (string): mathematical imaginary expression part.
+        a (any): lower integration extreme.
+        b (any): higher integration extreme.
+        n (int): wave function index.
+
+    Returns:
+        plot: the wave-function plot for the index n is returned.
+    """
+    
+    if coefficient != colored( "Error, division by 0!", "red" ):
+        x = np.arange( a, b, ( ( b-a ) / 10 ) )
+
+        def func( x ):
+            return coefficient * ut.e_parser( real_part, imaginary_part, n, x )
+        my_label = "Normalized wave-function f(x) for n = " + str( n )
+
+        plt.xlabel( "Re: f(x)" )
+        plt.ylabel( "Im: f(x)" )
+        plt.title( my_label )
+
+        if imaginary_part == "0":
+            plt.xlabel( "x" )
+            plt.ylabel( "Re: f(x)" )
+            plt.plot( np.real( func( x ) ), color = "green" )
+        else:
+            plt.plot( np.real( func( x ) ), np.imag( func( x ) ), color = "green" )
+
+        plt.show()
+
 #################################################
 #     Doing tests
 #################################################

@@ -8,10 +8,11 @@ Author: Gianluca Bianco
 #     Libraries
 #################################################
 import parser
-import math as mt
 import doctest
 from termcolor import colored
 import numpy as np
+import matplotlib.pyplot as plt
+import math as mt
 
 #################################################
 #     Testing functions
@@ -21,14 +22,14 @@ def test_integral( x ):
     Function used for testing only.
     """
     
-    return x * mt.exp( -pow( x, 2 ) )
+    return x * np.exp( -pow( x, 2 ) )
 
 def test_integral_2( x ):
     """
     Function used for testing only.
     """
     
-    return mt.exp( -2 * pow( x, 2 ) )
+    return np.exp( -2 * pow( x, 2 ) )
 
 def test_integral_3( x ):
     """
@@ -42,7 +43,7 @@ def test_integral_4( x ):
     Function used for testing only.
     """
     
-    return mt.exp( -x + 4 )
+    return np.exp( -x + 4 )
 
 #################################################
 #     Orthogonal polynomials functions
@@ -182,13 +183,13 @@ def e_parser( real_part, imaginary_part, n, x ):
     Testing:
         >>> e_parser( "pow( x, n )", "0", 2, 2 )
         (4+0j)
-        >>> e_parser( "n*mt.cos( x )", "3*n", 2, mt.pi )
+        >>> e_parser( "n*np.cos( x )", "3*n", 2, np.pi )
         (-2+6j)
-        >>> e_parser( "n*mt.cos( k )", "3*n", 2, mt.pi )
+        >>> e_parser( "n*np.cos( k )", "3*n", 2, np.pi )
         Traceback (most recent call last):
             ...
         NameError: name 'k' is not defined
-        >>> e_parser( "n*mt.cos( x )", "3*z", 2, mt.pi )
+        >>> e_parser( "n*np.cos( x )", "3*z", 2, np.pi )
         Traceback (most recent call last):
             ...
         NameError: name 'z' is not defined
@@ -204,7 +205,7 @@ def e_parser( real_part, imaginary_part, n, x ):
     real_p = parser.expr( real_part ).compile()
     imag_p = parser.expr( imaginary_part ).compile()
     
-    return complex( eval( real_p ), eval( imag_p ) )
+    return eval( real_p ) + eval( imag_p ) * 1j
 
 #################################################
 #     "integral" function
@@ -214,10 +215,12 @@ def integral( function, a, b ):
     1-dimensional integral solution for finite and infinite bound conditions, using the Simpson rule.
 
     Args:
-        function (any): integrand function
+        a (any): lower integration extreme.
+        b (any): higher integration extreme.
+        function (any): integrand function.
 
-    Returns:\033[31m
-        any: integral of the given function
+    Returns:
+        any: integral of the given function.
         
     Testing:
         >>> IsInBounds( integral( test_integral, -np.Infinity, np.Infinity ), -0.001, 0.001 )
@@ -240,18 +243,18 @@ def integral( function, a, b ):
     
     if a == -np.Infinity or b == np.Infinity:
         inf = 0
-        sup = mt.pi
+        sup = np.pi
         
         if a != -np.Infinity and b == np.Infinity:
             inf = 0
-            sup = mt.pi / 2
+            sup = np.pi / 2
         elif a == -np.Infinity and b != np.Infinity:
-            inf = -mt.pi / 2
+            inf = -np.pi / 2
             sup = 0
             
-        var = lambda x: function( mt.tan( x ) ) / pow( mt.cos( x ), 2 )
-        var_inf = function( mt.tan( inf ) ) / pow( mt.cos( inf ), 2 )
-        var_sup = function( mt.tan( sup ) ) / pow( mt.cos( sup ), 2 )
+        var = lambda x: function( np.tan( x ) ) / pow( np.cos( x ), 2 )
+        var_inf = function( np.tan( inf ) ) / pow( np.cos( inf ), 2 )
+        var_sup = function( np.tan( sup ) ) / pow( np.cos( sup ), 2 )
         
     elif a != -np.Infinity and b != np.Infinity:
         inf = a
