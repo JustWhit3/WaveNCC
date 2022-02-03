@@ -1,5 +1,5 @@
-cplot==0.8.5
 matplotlib==3.1.2
 numpy>=1.21
+scipy==1.6.2
 sympy==1.9
 termcolor==1.1.0

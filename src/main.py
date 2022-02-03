@@ -8,15 +8,16 @@ Author: Gianluca Bianco
 #     Libraries
 #################################################
 import sys, os
+
 import functions as ft
 from termcolor import colored
+import numpy as np
 from numpy import Infinity, pi
 
 #################################################
 #     Main program
 #################################################
 def main():
-
     #Global variables:
     inf = Infinity
 
