@@ -7,7 +7,7 @@
         <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
     </a>
 	<img title="Python 3.8" alt="Python 3.8" src="https://img.shields.io/badge/Python-3.8-informational?style=flat-square">
-    </a>
+    </a><br>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/WaveNCC?color=red">
 	<img title="Repo size" alt="repo size" src="https://img.shields.io/github/repo-size/JustWhit3/WaveNCC?color=red">
 	<img title="Lines of code" alt="total lines" src="https://img.shields.io/tokei/lines/github/JustWhit3/WaveNCC?color=red">
@@ -22,7 +22,7 @@
 
 ## Introduction
 
-This program computes the normalization coefficients <img src="https://render.githubusercontent.com/render/math?math=\color{green}{c_n}"> of a given orthogonal 1-dimensional complex wave-function <img src="https://render.githubusercontent.com/render/math?math=\color{green}{\psi_n(x)}"> or for a set of them. Additionally, it performs orthogonality and orthonormality checks and plots the normalized wave-functions themselves. More physical and mathematical information can be found [here](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background%20explanation.md).
+This program computes the normalization coefficients <img src="https://render.githubusercontent.com/render/math?math=\color{green}{c_n}"> of a given orthogonal 1-dimensional complex wave-function <img src="https://render.githubusercontent.com/render/math?math=\color{green}{\psi_n(x)}"> for a given *n* index, or for a whole set of orthogonal wave-functions. Additionally, it performs orthogonality and orthonormality checks and plots the normalized wave-functions shapes. More physical and mathematical information can be found [here](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background%20explanation.md).
 
 The set of <img src="https://render.githubusercontent.com/render/math?math=\color{green}{\psi_n(x)}"> wave-functions is used in quantum mechanics to find a generic solution for the 1-D [Schrödinger equation](https://users.aber.ac.uk/ruw/teach/327/hatom.php) and in particular for the equation of the harmonic oscillator.
 
@@ -33,7 +33,7 @@ This program computes the coefficients only for a certain kind of wave-function,
 - 1-dimensional (therefore, with only one variable).
 - Time independent.
 
-The function may depends on an index *n* but this is not necessary, since the program can calculate the coefficients also for this kind of mathematical expression.
+The function may depends on an index *n* but this is not necessary, since the program can calculate the coefficients also if *n=0*.
 > NB: equation color is green in order to improve the readability both for light and dark GitHub themes.
 
 An example output of the program:
