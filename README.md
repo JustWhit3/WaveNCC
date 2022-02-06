@@ -10,7 +10,7 @@
     </a><br>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/WaveNCC?color=red">
 	<img title="Repo size" alt="repo size" src="https://img.shields.io/github/repo-size/JustWhit3/WaveNCC?color=red">
-	<img title="Lines of code" alt="total lines" src="https://img.shields.io/tokei/lines/github/JustWhit3/WaveNCC?color=red">
+	<img title="Total lines" alt="total lines" src="https://img.shields.io/tokei/lines/github/JustWhit3/WaveNCC?color=red">
 </p>
 
 ## Table of contents
