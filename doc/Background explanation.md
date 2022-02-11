@@ -11,6 +11,8 @@ In quantum physics, a 1-dimensional [wave-function](https://en.wikipedia.org/wik
 
 The [Schrödinger equation](https://users.aber.ac.uk/ruw/teach/327/hatom.php) determines how wave-function evolve over space and time.
 
+> **NOTE**: if equations / images are not correctly displayed, this may be probably caused by Latex equation editor website maintenance. Check [here](https://latex.codecogs.com/): if the website is not displayed, server may be temporarily down for updates, so you can come back here in a few hours / days. Sorry.
+
 In this program, the wave-function is considered as time-independent, therefore this approximation could be applied:
 
 <img src="https://latex.codecogs.com/svg.image?\color{DarkGreen}&space;\psi(x,t)&space;\rightarrow&space;\psi(x,0)&space;=&space;\psi(x)" title="\color{DarkGreen} \psi(x,t) \rightarrow \psi(x,0) = \psi(x)" />
