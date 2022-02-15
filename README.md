@@ -19,6 +19,8 @@
 - [Repository structure](#repository-structure)
 - [Documentation](#documentation)
 - [How to use](#how-to-use)
+- [Credits](#credits)
+  - [Project leaders](#project-leaders)
 
 ## Introduction
 
@@ -76,7 +78,6 @@ Here you can find a list of the documentation files of the repository:
 
 - [Background explanation](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background%20explanation.md): contains some t theoretical explanations about the algorithm and the physics / mathematical background topics of the program.
 - [Download, install and test](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Download%20and%20install.md): contains information about how to install the requirements, test the code and run it.
-- [Credits](https://github.com/JustWhit3/WaveNCC/blob/main/doc/CREDITS.md): contains a list of all the people who contributed to this project.
 - [Contributing](https://github.com/JustWhit3/WaveNCC/blob/main/doc/CONTRIBUTING.md): contains some information about how to contribute to this project.
 - [Todo](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Todo.md): contains a list of todo stuff which could be implemented to extend the software with new tools.
 
@@ -107,3 +108,21 @@ And finally the normalization coefficient and a plot of the normalzied wave-func
 ```txt
 The normalization coefficient for n = 3  is:  0.4086571521491726
 ```
+
+## Credits
+
+### Project leaders
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://justwhit3.github.io/"><img src="https://avatars.githubusercontent.com/u/48323961?v=4" width="100px;" alt=""/><br /><sub><b>Gianluca Bianco</b></sub></a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
