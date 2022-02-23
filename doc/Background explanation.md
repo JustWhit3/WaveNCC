@@ -49,7 +49,7 @@ with <img src="https://render.githubusercontent.com/render/math?math=\color{gree
 
 <img src="https://latex.codecogs.com/svg.image?\color{DarkGreen}&space;c_n&space;=&space;\dfrac{<\psi_n,\psi>}{<\psi_n,\psi_n>}" title="\color{DarkGreen} c_n = \dfrac{<\psi_n,\psi>}{<\psi_n,\psi_n>}" />
 
-This means that for an orthogonal wave-function holds:
+This means that for a wave-function of an orthogonal set of wave-functions holds:
 
 <img src="https://latex.codecogs.com/svg.image?\color{DarkGreen}&space;c_n&space;=&space;\dfrac{1}{\sqrt{\|\psi_n\|}}" title="\color{DarkGreen} c_n = \dfrac{1}{\sqrt{\|\psi_n\|}}" />
 
