@@ -60,7 +60,6 @@ WaveNCC/
 │   ├── CONTRIBUTING.md
 │   ├── CREDITS.md
 ├── src/
-│   ├── utils.py
 │   ├── functions.py
 │   ├── main.py
 ├── img/
@@ -103,7 +102,7 @@ The next step is to insert the wave-function index *n* :
 Enter the wave-function index "n": 3
 ```
 
-And finally the normalization coefficient and a plot of the normalzied wave-function will be displayed:
+And finally the normalization coefficient and a plot of the normalized wave-function will be displayed:
 
 ```txt
 The normalization coefficient for n = 3  is:  0.4086571521491726

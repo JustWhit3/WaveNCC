@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jan 21 12:32:00 2022
@@ -8,16 +9,17 @@ Author: Gianluca Bianco
 #     Libraries
 #################################################
 import sys, os
-
 import functions as ft
 from termcolor import colored
 import numpy as np
 from numpy import Infinity, pi
+from arsenalgear.mathematics import Hermite, Chebyshev, Legendre, Laguerre
 
 #################################################
 #     Main program
 #################################################
 def main():
+    
     #Global variables:
     inf = Infinity
 
@@ -52,8 +54,9 @@ def main():
         
         print( "" )
         print( "Now you will have to enter real and imaginary part of the wave-function you want to normalize. Some notes:" )
-        print( "1. enter each mathematical function as \"np.function\" (ex: np.cos(), np.exp(), etc...)." )
-        print( "2. if the real or the imaginary parts are null, enter 0 in its place." )
+        print( "1. enter each mathematical function as \"np.function\" (ex: np.cos(), np.exp() etc...)." )
+        print( "2. to enter an orthogonal polynomial write its name with first capital letter (ex: Hermite...)." )
+        print( "3. if the real or the imaginary parts are null, enter 0 in its place." )
         print()
         
         wave_real: str = input( "Enter the " + colored( "REAL", "yellow" ) + " part: " )

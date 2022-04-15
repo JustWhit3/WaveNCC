@@ -1,4 +1,4 @@
-# Run the program
+# Download and install
 
 ## Table of contents
 
@@ -41,17 +41,15 @@ Extra information about how to move inside the command line once you have ran th
 If you want to run the tests you have to type:
 
 ```shell
-python src/utils.py
 python src/functions.py
 ```
 
-If anything is displayed it means that tests ran correctly. First command is for [utils](https://github.com/JustWhit3/WaveNCC/blob/main/src/utils.py), second command is for [functions](https://github.com/JustWhit3/WaveNCC/blob/main/src/functions.py).
+If anything is displayed it means that tests ran correctly.
 
 Tests have been performed using the [Doctest](https://docs.python.org/3/library/doctest.html) framework.
 
 If you want a detailed tests log printed on the screen, simply enter:
 
 ```shell
-python src/utils.py -v
 python src/functions.py -v
 ```
