@@ -4,7 +4,7 @@ authors:
 - family-names: "Gianluca"
   given-names: "Bianco"
 title: "WaveNCC"
-version: 1.0.0
+version: 1.0.1
 doi: https://zenodo.org/badge/latestdoi/450422511
 date-released: 2022-02-07
 url: "https://github.com/JustWhit3/WaveNCC"
