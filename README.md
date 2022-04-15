@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/JustWhit3/WaveNCC/blob/main/img/logo.svg" height=220></p>
 
-<h3 align="center">A program to compute the normalization coefficients of a given orthogonal 1-D complex wave function</h3>
+<h3 align="center">A program to compute the normalization coefficients of a given set of orthogonal 1-D complex wave functions.</h3>
 <p align="center">
     <img title="v1.0" alt="v1.0" src="https://img.shields.io/badge/version-v1.0-informational?style=flat-square"
     <a href="LICENSE">
@@ -24,7 +24,7 @@
 
 ## Introduction
 
-This program computes the normalization coefficients <img src="https://render.githubusercontent.com/render/math?math=\color{green}{c_n}"> of a given orthogonal 1-dimensional complex wave-function <img src="https://render.githubusercontent.com/render/math?math=\color{green}{\psi_n(x)}"> for a given *n* index, or for a whole set of orthogonal wave-functions. Additionally, it performs orthogonality and orthonormality checks and plots the normalized wave-functions shapes. More physical and mathematical information can be found [here](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background%20explanation.md).
+This program computes the normalization coefficients <img src="https://render.githubusercontent.com/render/math?math=\color{green}{c_n}"> of a given set of orthogonal 1-dimensional complex wave-functions <img src="https://render.githubusercontent.com/render/math?math=\color{green}{\psi_n(x)}"> for a given *n* index. Additionally, it performs orthogonality and orthonormality checks and plots the normalized wave-functions shapes. More physical and mathematical information can be found [here](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background%20explanation.md).
 
 The set of <img src="https://render.githubusercontent.com/render/math?math=\color{green}{\psi_n(x)}"> wave-functions is used in quantum mechanics to find a generic solution for the 1-D [Schrödinger equation](https://users.aber.ac.uk/ruw/teach/327/hatom.php) and in particular for the equation of the harmonic oscillator.
 
