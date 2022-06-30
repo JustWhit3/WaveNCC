@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/JustWhit3/WaveNCC/blob/main/img/logo.svg" height=220></p>
 
-<h3 align="center">A program to compute the normalization coefficients of a given set of orthogonal 1-D complex wave functions.</h3>
+<h3 align="center">A program to compute the normalization coefficients of a given set of orthogonal 1D complex wave functions.</h3>
 <p align="center">
     <img title="v1.0" alt="v1.0" src="https://img.shields.io/badge/version-v1.0-informational?style=flat-square"
     <a href="LICENSE">
