@@ -46,7 +46,7 @@ jobs:
       - name: Download Output Directory
         uses: actions/download-artifact@v2
         with:
-          name: doc-files
+          name: doc-files 
           path: docs
           
       # add, commit and push to gh-pages
