@@ -134,8 +134,6 @@ Here you can find a list of the documentation files of the repository:
 - [Contributing](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Contributing.md): contains some information about how to contribute to this project.
 - [Todo](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Todo.md): contains a list of todo stuff which could be implemented to extend the software with new tools.
 
-Code documentation is created using Doxygen and can be accessed [here](https://justwhit3.github.io/WaveNCC/).
-
 ## How to use
 
 Once you ran the program and choose an option, it will be asked to insert real and imaginary part of the wave-function you want to normalize. An example is the following:
