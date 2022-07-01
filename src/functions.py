@@ -85,7 +85,7 @@ def integral( function, a, b ):
     result = 0
     
     for i in range( 1, int( val - 1 ) ):
-        x = inf + 2 * i * first
+        x = inf + 2 * i * first 
         result = result + 2 * var( x )
         
     for i in range( 1, int( val ) ):
