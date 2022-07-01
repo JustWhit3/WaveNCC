@@ -17,7 +17,9 @@
 
 - [Introduction](#introduction)
 - [Repository structure](#repository-structure)
-- [Documentation](#documentation)
+- [Supported operating systems](#supported-operating-systems)
+- [Install and run](#install-and-run)
+- [Extra documentation](#extra-documentation)
 - [How to use](#how-to-use)
 - [Credits](#credits)
   - [Project leaders](#project-leaders)
@@ -56,9 +58,7 @@ WaveNCC/
 ├── doc/
 │   ├── Background explanation.md
 │   ├── Download and install.md
-│   ├── Todo.md
-│   ├── CONTRIBUTING.md
-│   ├── CREDITS.md
+│   ├── Contributing.md
 ├── src/
 │   ├── functions.py
 │   ├── main.py
@@ -71,13 +71,67 @@ WaveNCC/
 │── .all-contributorsrc
 ```
 
-## Documentation
+## Supported operating systems
+
+- **Linux**
+  - *Ubuntu* (tested)
+- **MacOS**
+- **Windows**
+
+## Install an run
+
+Steps to be reproduced:
+
+**1)** Download one of the releases of the repository or clone the main branch.
+
+**2)** Unzip and enter the downloaded repository directory.
+
+**3)** Install all the prerequisites:
+
+```shell
+pip install -r requirements.txt
+```
+
+Prerequisites list:
+
+- Python 3.8.10.
+- [Doctest](https://docs.python.org/3/library/doctest.html) for Python.
+- All the required libraries with the right version.
+
+**4)** Run the main program:
+
+To run the code you can simply enter this command in the shell:
+
+```shell
+python src/main.py
+```
+
+Extra information about how to move inside the command line once you have ran the code can be found in the [How to use](https://github.com/JustWhit3/WaveNCC#:~:text=with%20new%20tools.-,How%20to%20use,-Once%20you%20ran) section.
+
+**5)** Run the tests (optional):
+
+If you want to run the tests you have to type:
+
+```shell
+python src/functions.py
+```
+
+If anything is displayed it means that tests ran correctly.
+
+Tests have been performed using the [Doctest](https://docs.python.org/3/library/doctest.html) framework.
+
+If you want a detailed tests log printed on the screen, simply enter:
+
+```shell
+python src/functions.py -v
+```
+
+## Extra documentation
 
 Here you can find a list of the documentation files of the repository:
 
-- [Background explanation](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background%20explanation.md): contains some t theoretical explanations about the algorithm and the physics / mathematical background topics of the program.
-- [Download, install and test](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Download%20and%20install.md): contains information about how to install the requirements, test the code and run it.
-- [Contributing](https://github.com/JustWhit3/WaveNCC/blob/main/doc/CONTRIBUTING.md): contains some information about how to contribute to this project.
+- [Background explanation](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Background-explanation.md): contains some t theoretical explanations about the algorithm and the physics / mathematical background topics of the program.
+- [Contributing](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Contributing.md): contains some information about how to contribute to this project.
 - [Todo](https://github.com/JustWhit3/WaveNCC/blob/main/doc/Todo.md): contains a list of todo stuff which could be implemented to extend the software with new tools.
 
 ## How to use
