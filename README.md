@@ -56,8 +56,7 @@ WaveNCC/
 │   ├── workflows
 │   │   ├── codeql-analysis.ylm
 ├── doc/
-│   ├── Background explanation.md
-│   ├── Download and install.md
+│   ├── Background-explanation.md
 │   ├── Contributing.md
 ├── src/
 │   ├── functions.py
