@@ -17,7 +17,6 @@
 ## Table of contents
 
 - [Introduction](#introduction)
-- [Repository structure](#repository-structure)
 - [Supported operating systems](#supported-operating-systems)
 - [Install and run](#install-and-run)
 - [Extra documentation](#extra-documentation)
@@ -48,28 +47,6 @@ An example output of the program:
 The software is and will stay **free**, but if you want to support me with a donation it would be really appreciated!
 
 <a href="https://www.buymeacoffee.com/JustWhit33" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
-## Repository structure
-
-```txt
-WaveNCC/
-├── .github/
-│   ├── workflows
-│   │   ├── codeql-analysis.ylm
-├── doc/
-│   ├── Background-explanation.md
-│   ├── Contributing.md
-├── src/
-│   ├── functions.py
-│   ├── main.py
-├── img/
-│── README.md
-│── LICENSE
-│── CITATION.cff
-│── requirements.txt
-│── .gitignore
-│── .all-contributorsrc
-```
 
 ## Supported operating systems
 
